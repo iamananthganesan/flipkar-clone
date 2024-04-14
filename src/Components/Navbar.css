@@ -1,0 +1,75 @@
+.navbar-container {
+    height: 56px;
+    width: 100%;
+    background-color: var(--flipkart-lightBlue);
+    color: #fff;
+    position: fixed;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar {
+    max-width: 1248px;
+    width: 100%;
+    display: flex;   
+    align-items: center;
+    gap: 25px;
+}
+
+.navbar-searchbar {
+    width: 420px;
+    position: relative;
+}
+
+.navbar-searchbar input[type="text"] {
+    width: 100%;
+    padding: 10px 15px;
+}
+
+.navbar-searchbar input[type="text"]:focus {
+    outline: none;
+}
+
+.navbar-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.navbar-login-btn {
+    background-color: var(--flipkart-white);
+    padding: 7px 45px;
+    color: var(--flipkart-lightBlue);
+    border: none;
+    font-size: 0.95rem;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.cart-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    gap: 20px;
+}
+.cart-wrapper span{
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+.cart-wrapper svg{
+    font-size: 0.95rem; 
+}
+.navbar-cart-icons, .navbar-more{
+    cursor: pointer;
+}
+.navbar-cart-icons > a{
+    color: var(--flipkart-white);
+    
+}
