@@ -8,19 +8,23 @@ import Cart from './Pages/Cart/Cart';
 
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import Navbar from './Components/Navbar';
+import { Provider } from 'react-redux';
+import { store } from './Store';
 
 const App = () => {
   return (
     <div>
-      <BrowserRouter>
-      <Navbar/>
-        <Routes>
-          <Route path='/' element={<Home/>}></Route>
-          <Route path='/products' element={<Products/>}></Route>
-          <Route path='/productdetails/:id' element={<ProductsDetails/>}></Route>
-          <Route path='/cart' element={<Cart/>}></Route>
-        </Routes>
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route path='/' element={<Home />}></Route>
+            <Route path='/products' element={<Products />}></Route>
+            <Route path='/productdetails/:id' element={<ProductsDetails />}></Route>
+            <Route path='/cart' element={<Cart />}></Route>
+          </Routes>
+        </BrowserRouter>
+      </Provider>
     </div>
   )
 }

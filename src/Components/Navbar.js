@@ -1,19 +1,38 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { IoSearch } from "react-icons/io5";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart, FaSignOutAlt } from "react-icons/fa";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import './Navbar.css'
 import LoginModel from './LoginModel/LoginModel';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeUser } from '../Slices/UserSlice';
+import supabase from '../supabase';
 
 const Navbar = () => {
     const [search, setSearchVal] = useState('');
     const [isOpen, setOpen] = useState(false);
+    const dispatch = useDispatch();
+    const getUserDetails = useSelector(state => state.user.user)
+
+    useEffect(() => {
+        if (getUserDetails) {
+            setOpen(false)
+        }
+    }, [getUserDetails])
+
     const handleSearch = (event) => {
         setSearchVal(event.target.value)
     }
-    const handleCloseModel = (flag) =>{
+    const handleCloseModel = (flag) => {
         setOpen(flag)
+    }
+    //Logout handler
+    const handleLogout = () => {
+        const { error } = supabase.auth.signOut();
+        if (!error) {
+            dispatch(removeUser())
+        }
     }
     return (
         <>
@@ -35,7 +54,8 @@ const Navbar = () => {
                         />
                         <button className='navbar-btn'> <IoSearch /></button>
                     </div>
-                    <button className='navbar-login-btn' onClick={() => setOpen(true)}> Login</button>
+                    {getUserDetails == null ? (<button className='navbar-login-btn' onClick={() => setOpen(true)}> Login</button>) : (<></>)
+                    }
                     <div className='cart-wrapper'>
                         <div className='become-sellar'>
                             <h3>Become a sellar</h3>
@@ -51,12 +71,15 @@ const Navbar = () => {
                                 </Link>
                             </div>
                         </div>
+                        <div className='user-details'>
+                            {getUserDetails && <h3>Welcome {getUserDetails?.email.slice(0, 10)} <FaSignOutAlt onClick={handleLogout} /></h3>}
+                        </div>
                     </div>
                     {/* <Link to={'/'}>Home</Link>
                 <Link to={'/products'}>Products</Link> */}
                 </div>
             </div>
-            <LoginModel isOpen={isOpen} setOpen={setOpen} handleCloseModel={handleCloseModel}/>
+            <LoginModel isOpen={isOpen} setOpen={setOpen} handleCloseModel={handleCloseModel} />
         </>
     )
 }

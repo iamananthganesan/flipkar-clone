@@ -1,19 +1,40 @@
 import React, { useState } from 'react'
 import './LoginModel.css'
 import { RxCross2 } from "react-icons/rx";
+import supabase from '../../supabase';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../Slices/UserSlice';
 const LoginModel = ({ isOpen, setClose, handleCloseModel }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loginType, setLoginType] = useState(true)
-    const handleEmailaddress = (event) => {
-        setEmail(event.target.value)
-    }
-    const handlePassword = (event) => {
-        setPassword(event.target.value)
-    }
-
+    const dispatch = useDispatch();
     const handleCloseLoginModel = () => {
         handleCloseModel(false);
+    }
+
+    const handleSignUp = async () => {
+        const { data, error } = supabase.auth.signUp({
+            email: email,
+            password: password
+        })
+        if (data.user) {
+            alert("Account has been created successfully!!! Please verify your email");
+        } else {
+            alert(error.message)
+        }
+    }
+    const handleLogin = async () => {
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email: email,
+            password: password
+        })
+        if (error) {
+            alert(error.message);
+            return
+        }
+        dispatch(setUser(data.user));
+        handleCloseLoginModel()
     }
     return (
         <>
@@ -54,8 +75,8 @@ const LoginModel = ({ isOpen, setClose, handleCloseModel }) => {
                             </div>
                             <div className='form-control'>
                                 {
-                                    loginType ? (<button className='btn-login'>Login</button>) :
-                                        (<button className='btn-signup'>Sign Up</button>)
+                                    loginType ? (<button className='btn-login' onClick={handleLogin}>Login</button>) :
+                                        (<button className='btn-signup' onClick={handleSignUp}>Sign Up</button>)
                                 }
                             </div>
                             <div className='type-of-user'>
@@ -64,7 +85,7 @@ const LoginModel = ({ isOpen, setClose, handleCloseModel }) => {
                                 }
 
 
-                            </div>                           
+                            </div>
                             <div className="close" onClick={() => handleCloseLoginModel(false)}>
                                 <RxCross2 />
                             </div>
