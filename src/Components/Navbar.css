@@ -13,7 +13,7 @@
 .navbar {
     max-width: 1248px;
     width: 100%;
-    display: flex;   
+    display: flex;
     align-items: center;
     gap: 25px;
 }
@@ -59,17 +59,22 @@
     font-size: 0.85rem;
     gap: 20px;
 }
-.cart-wrapper span{
+
+.cart-wrapper span {
     font-size: 0.85rem;
     font-weight: 700;
 }
-.cart-wrapper svg{
-    font-size: 0.95rem; 
+
+.cart-wrapper svg {
+    font-size: 1rem;
 }
-.navbar-cart-icons, .navbar-more{
+
+.navbar-cart-icons,
+.navbar-more {
     cursor: pointer;
 }
-.navbar-cart-icons > a{
+
+.navbar-cart-icons>a {
     color: var(--flipkart-white);
-    
+
 }

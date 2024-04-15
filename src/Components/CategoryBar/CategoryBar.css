@@ -1,0 +1,15 @@
+.category-bar {
+    display: flex;
+    height: auto;
+    cursor: pointer;
+}
+
+.category-bar-img {}
+
+.category-bar-img>img {
+    width: 100%;
+}
+
+.category-bar-name {
+    font-size: 1rem;
+}

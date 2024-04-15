@@ -72,7 +72,10 @@ const Navbar = () => {
                             </div>
                         </div>
                         <div className='user-details'>
-                            {getUserDetails && <h3>Welcome {getUserDetails?.email.slice(0, 10)} <FaSignOutAlt onClick={handleLogout} /></h3>}
+                            {getUserDetails && <h3>Welcome {getUserDetails?.email.slice(0, 10)} </h3>}
+                        </div>
+                        <div className='logout-wrapper'>
+                           <h3> <FaSignOutAlt onClick={handleLogout} /></h3>
                         </div>
                     </div>
                     {/* <Link to={'/'}>Home</Link>

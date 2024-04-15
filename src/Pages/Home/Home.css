@@ -1,0 +1,6 @@
+.home-category-bar{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    padding-top: 80px;
+}
